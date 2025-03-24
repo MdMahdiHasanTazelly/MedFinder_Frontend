@@ -1,0 +1,81 @@
+.navbar {
+
+    background-color: white;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 50;
+    transition: all 0.3s ease;
+  }
+  
+  .navbar .container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px;
+  }
+  
+  .logo {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #2563eb;
+  }
+
+.container a{
+  text-decoration: none;
+}
+  
+  .nav-links {
+    display: flex;
+    list-style: none;
+  }
+  
+  .nav-links li {
+    margin-right: 24px;
+  }
+  
+  .nav-links li:last-child {
+    margin-right: 0;
+  }
+  
+  .nav-links a {
+    text-decoration: none;
+    color: #4b5563;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-links a:hover {
+    color: #2563eb;
+  }
+  
+  .auth-buttons {
+    display: flex;
+  }
+  
+  .login-btn, .register-btn {
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease;
+  }
+  
+  .login-btn {
+    background-color: #2563eb;
+    color: white;
+  }
+  
+  .login-btn:hover {
+    background-color: #1d4ed8;
+  }
+  
+  .register-btn {
+    background-color: #4b5563;
+    color: white;
+    margin-left: 8px;
+  }
+  
+  .register-btn:hover {
+    background-color: #1f2937;
+  }
