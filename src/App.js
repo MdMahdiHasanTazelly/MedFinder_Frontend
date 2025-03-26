@@ -5,7 +5,7 @@ import Landing from './Landing.js';
 import DoctorsInfo from './DoctorsInfo.js';
 import Navbar from './Navbar.js';
 import Footer from './Footer.js';
-import DoctorForm from './DoctorForm.js';
+import DoctorForm from './admin/DoctorForm.js';
 import HospitalForm from './admin/HospitalForm.js';
 import FindHospital from './FindHospital.js';
 import FindDoctor from './FindDoctor.js';
@@ -36,6 +36,8 @@ function App() {
           <Route path='/find-hospitals' element={<FindHospital/>}/>
           <Route path='/login' element={<Login/>} />
           <Route path='/find-doctors' element={<FindDoctor/>}/>
+          <Route path='/add-hospital' element={<HospitalForm/>}/>
+          <Route path='/add-doctor' element={<DoctorForm/>}/>
         </Routes>
          
         <Footer/>
