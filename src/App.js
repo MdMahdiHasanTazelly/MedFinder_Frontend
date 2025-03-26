@@ -6,9 +6,10 @@ import DoctorsInfo from './DoctorsInfo.js';
 import Navbar from './Navbar.js';
 import Footer from './Footer.js';
 import DoctorForm from './DoctorForm.js';
-import HospitalForm from './HospitalForm.js';
+import HospitalForm from './admin/HospitalForm.js';
 import FindHospital from './FindHospital.js';
 import FindDoctor from './FindDoctor.js';
+import DoctorsDetails from './DoctorsDetails.js';
 
 function App() {
   return (
@@ -21,7 +22,8 @@ function App() {
     //   {/* <DoctorsInfo /> */}
     //   {/* <DoctorForm/> */}
     //   {/* <HospitalForm/> */}
-    //   <FindDoctor/>
+    //   {/* <FindDoctor/> */}
+    //   {/* <DoctorsDetails/> */}
       
     // </div>
     // <Footer/>
@@ -35,7 +37,7 @@ function App() {
           <Route path='/login' element={<Login/>} />
           <Route path='/find-doctors' element={<FindDoctor/>}/>
         </Routes>
-        
+         
         <Footer/>
     </Router>
     

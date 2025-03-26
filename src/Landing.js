@@ -3,6 +3,8 @@ import { useState } from 'react';
 function Landing() {
     const [searchQuery, setSearchQuery] = useState('');
     const [showSuggestions, setShowSuggestions] = useState(false);
+
+    const sessiontoken = localStorage.getItem('sessiontoken');  //getting session token from local storage
   
     const handleSearchInput = (e) => {
       setSearchQuery(e.target.value);

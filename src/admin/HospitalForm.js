@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './css/HospitalForm.css';
+import '../css/HospitalForm.css';
 
 const HospitalForm = ({ onSubmit }) => {
     const [formData, setFormData] = useState({
