@@ -1,13 +1,33 @@
+import axios from 'axios';
 import './css/FindHospital.css';
-import React, { useState } from 'react';
+import showToast from './toast/Toast';
+import React, { useState, useEffect } from 'react';
 
 
 function FindDoctor() {
     const [query, setQuery] = useState('');
     const [hospitals, setHospitals] = useState([]);
 
+    useEffect( ()=>{
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/hospitals`)
+        .then( (res)=>{
+            setHospitals(res.data);
+        })
+        .catch( (error)=>{
+            console.log(error);
+        })
+    }, []);
+
     const handleSearch = ()=>{
-        console.log("Searching hospital by name.");
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/hospitals/search?query=${query}`)
+        .then( (res)=>{
+            setHospitals(res.data);
+        })
+        .catch( (error)=>{
+            showToast(error.response.data.message, 'error');
+            setHospitals([]);
+        });
+        setQuery("");
     }
 
     return (
