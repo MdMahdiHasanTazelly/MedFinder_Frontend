@@ -1,7 +1,11 @@
-import React, { useState } from 'react';
+import React, { use, useState } from 'react';
 import '../css/HospitalForm.css';
+import { useNavigate } from 'react-router-dom';
+import showToast from '../toast/Toast';
+import axios from 'axios';
 
-const HospitalForm = ({ onSubmit }) => {
+const HospitalForm = () => {
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         hRegNo: '',
         name: '',
@@ -18,7 +22,37 @@ const HospitalForm = ({ onSubmit }) => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        onSubmit(formData);
+        const newHospital = {
+            hRegNo: formData.hRegNo,
+            name: formData.name,
+            contactNo: formData.contactNo,
+            location: {
+                district: formData.district,
+                subDistrict: formData.subDistrict,
+                holdingNo: formData.holdingNo,
+                road: formData.road,
+            },
+        }
+    
+        axios.post(`${process.env.REACT_APP_BACKEND_URL}/hospitals`, newHospital)
+        .then( (res)=>{
+            showToast(res.data.message, "success");
+            navigate('/find-hospitals');
+        })
+        .catch( (error)=>{
+            showToast(error.response.data.error, "error");
+            navigate('/add-hospital');
+        });
+
+        setFormData({
+            hRegNo: '',
+            name: '',
+            contactNo: '',
+            district: '',
+            subDistrict: '',
+            holdingNo: '',
+            road: ''
+        });
     };
 
     return (

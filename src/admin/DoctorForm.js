@@ -24,17 +24,15 @@ const DoctorForm = () => {
     const handleSubmit = (e) => {
         e.preventDefault();
         setFormData(formData);
-        // console.log(formData);
 
         axios.post(`${process.env.REACT_APP_BACKEND_URL}/doctors`, formData)
         .then( (res)=>{
             showToast(res.data.message, "success");
-           navigate("/find-doctors");
+            navigate("/find-doctors");
         })
         .catch( (error)=>{
-            console.log(error);
             showToast(error.response.data.error, "error");
-            
+            navigate('/add-doctor');
         });
 
        setFormData({
