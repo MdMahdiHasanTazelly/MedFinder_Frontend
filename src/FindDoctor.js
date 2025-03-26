@@ -1,12 +1,35 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import './css/FindDoctor.css';
+import axios from "axios";
+import showToast from "./toast/Toast";
 
 function FindDoctor() {
     const [query, setQuery] = useState('');
     const [doctors, setDoctors] = useState([]);
 
+    //showing all the doctors info whenever users land on this page
+    useEffect(()=>{
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/doctors`)
+        .then((res)=>{
+            setDoctors(res.data);
+        })
+        .catch((error)=>{
+            console.log(error);
+        })
+    }, []);
+
+    //showing doctors info based on user's query
     const handleSearch = ()=>{
-        console.log("Search button kis clicked.");
+        setDoctors([]);  //removing doctors array for next search
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/doctors/search?query=${query}`)
+        .then( (res)=>{
+            setDoctors(res.data);
+        })
+        .catch( (error)=>{
+            showToast(error.response.data.message, 'error');
+            setQuery("");
+        });
+        setQuery("");
     }
 
     return (
@@ -27,6 +50,7 @@ function FindDoctor() {
                                 <h3>{doctor.name}</h3>
                                 <p><strong>Specialization:</strong> {doctor.specialization}</p>
                                 <p><strong>Contact:</strong> {doctor.contactNo}</p>
+                                <p><strong>Education:</strong> {doctor.degree}</p>
                                 <button >View Details</button>
                             </div>
                         ))
