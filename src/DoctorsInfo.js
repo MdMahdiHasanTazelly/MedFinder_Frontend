@@ -55,6 +55,10 @@ function DoctorsInfo() {
         })
     }
 
+    const updateHandler = async()=>{
+        navigate(`/doctors/${id}/update`);
+    }
+
     //to show the doctors details whenever user land on this page
     useEffect( ()=>{
         axios.get(`${process.env.REACT_APP_BACKEND_URL}/doctors/${id}`)
@@ -82,7 +86,7 @@ function DoctorsInfo() {
                 <p><strong>Specialization:</strong>&nbsp; {doctor.specialization}</p>
                 <p><strong>BMDC Reg:</strong>&nbsp; {doctor.dRegNo}</p>
 
-                <button >Update</button>
+                <button onClick={updateHandler} >Update</button>
                 <button onClick={ deletehandler }>Delete</button>
             </div>
 

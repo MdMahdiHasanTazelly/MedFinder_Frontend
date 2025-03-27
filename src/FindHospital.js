@@ -49,6 +49,7 @@ function FindDoctor() {
                             <p><strong>Contact:</strong> {hospital.contactNo}</p>
                             <p><strong>Location:</strong> {hospital.location.district}, {hospital.location.subDistrict}</p>
                             <p><strong>Address:</strong> {hospital.location.holdingNo}, {hospital.location.road || 'N/A'}</p>
+                            <p><strong>BMDC Reg No:</strong> {hospital.hRegNo}</p>
                         </div>
                     ))
                 ) : (
