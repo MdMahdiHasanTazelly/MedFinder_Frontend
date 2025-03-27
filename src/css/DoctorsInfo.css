@@ -1,4 +1,6 @@
-
+.doctors-info-container{
+    margin-bottom: 5rem;
+}
 
 .auth-buttons button {
     margin-left: 10px;
@@ -12,21 +14,27 @@
 .profile-section {
     display: flex;
     flex-direction: row;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
     margin-top: 6rem;
 }
 
+.profile-image{
+    width: 15rem;
+}
 
-/* .profile-image img {
-    width: 120px;
-    height: 120px;
+.profile-image img {
+    width: 70%;
     border-radius: 50%;
     margin-right: 20px;
-} */
+}
 
 .profile-info h2 {
     color: #007bff;
+}
+
+.work-education{
+    margin-left: 2.5rem !important;
 }
 
 .work-education, .hospital-list {
@@ -64,11 +72,4 @@
     cursor: pointer;
 }
 
-/* .footer {
-    text-align: center;
-    margin-top: 20px;
-    padding: 10px;
-    background: #343a40;
-    color: white;
-    border-radius: 8px;
-} */
+

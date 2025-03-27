@@ -9,25 +9,24 @@ import DoctorForm from './admin/DoctorForm.js';
 import HospitalForm from './admin/HospitalForm.js';
 import FindHospital from './FindHospital.js';
 import FindDoctor from './FindDoctor.js';
-import DoctorsDetails from './DoctorsDetails.js';
+
 
 function App() {
   return (
-    // <><Navbar />
+   
+   
     // <div className="App">
-      
-
+    //    <Navbar />
     //   {/* <Login/> */}
     //   {/* <Landing/> */}
     //   {/* <DoctorsInfo /> */}
     //   {/* <DoctorForm/> */}
     //   {/* <HospitalForm/> */}
     //   {/* <FindDoctor/> */}
-    //   {/* <DoctorsDetails/> */}
       
+    //   <Footer/>
     // </div>
-    // <Footer/>
-    // </>
+    
 
     <Router>
         <Navbar/>    
@@ -38,6 +37,7 @@ function App() {
           <Route path='/find-doctors' element={<FindDoctor/>}/>
           <Route path='/add-hospital' element={<HospitalForm/>}/>
           <Route path='/add-doctor' element={<DoctorForm/>}/>
+          <Route path='/doctors/:id' element={<DoctorsInfo/>}/>
         </Routes>
          
         <Footer/>

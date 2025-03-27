@@ -2,10 +2,13 @@ import { useState, useEffect } from "react";
 import './css/FindDoctor.css';
 import axios from "axios";
 import showToast from "./toast/Toast";
+import { useNavigate } from "react-router-dom";
 
 function FindDoctor() {
     const [query, setQuery] = useState('');
     const [doctors, setDoctors] = useState([]);
+
+    const navigate = useNavigate();
 
     //showing all the doctors info whenever users land on this page
     useEffect(()=>{
@@ -14,7 +17,7 @@ function FindDoctor() {
             setDoctors(res.data);
         })
         .catch((error)=>{
-            console.log(error);
+            showToast(error.response.data.error, "error");
         })
     }, []);
 
@@ -51,7 +54,10 @@ function FindDoctor() {
                                 <p><strong>Specialization:</strong> {doctor.specialization}</p>
                                 <p><strong>Contact:</strong> {doctor.contactNo}</p>
                                 <p><strong>Education:</strong> {doctor.degree}</p>
-                                <button >View Details</button>
+                                <button 
+                                onClick={ ()=>navigate(`/doctors/${doctor._id}`) }
+                                >View Details
+                                </button>
                             </div>
                         ))
                     ) : (
