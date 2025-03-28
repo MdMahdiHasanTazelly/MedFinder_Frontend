@@ -15,7 +15,7 @@ function UpdateDoctor() {
         degree: "",
         specialization: "",
         contactNo: "",
-        hospitals: [],
+        currentRole: ""
     });
 
     const handleChange = (e) => {
@@ -60,6 +60,9 @@ function UpdateDoctor() {
 
                 <label>Specialization:</label>
                 <input type="text" name="specialization" value={doctor.specialization} onChange={handleChange} required />
+
+                <label>Current Role:</label>
+                <input type="text" name="currentRole" value={doctor.currentRole} onChange={handleChange} required />
 
                 <label>Contact No:</label>
                 <input type="text" name="contactNo" value={doctor.contactNo} onChange={handleChange} required />

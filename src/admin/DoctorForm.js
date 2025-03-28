@@ -13,7 +13,7 @@ const DoctorForm = () => {
         degree: '',
         specialization: '',
         contactNo: '',
-        // hospitals: []
+        currentRole: ""
     });
 
     const handleChange = (e) => {
@@ -41,7 +41,7 @@ const DoctorForm = () => {
         degree: '',
         specialization: '',
         contactNo: '',
-        // hospitals: []
+        currentRole: "",
     });
 
     };
@@ -62,6 +62,9 @@ const DoctorForm = () => {
                 
                     <label>Specialization:</label>
                     <input type="text" name="specialization" value={formData.specialization} onChange={handleChange} required />
+
+                    <label>Current Role:</label>
+                    <input type="text" name="currentRole" value={formData.currentRole} onChange={handleChange} required />
                 
                     <label>Contact No:</label>
                     <input type="text" name="contactNo" value={formData.contactNo} onChange={handleChange} required />

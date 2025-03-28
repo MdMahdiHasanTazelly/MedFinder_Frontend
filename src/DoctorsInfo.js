@@ -132,8 +132,8 @@ function DoctorsInfo() {
 
 
             <div className="work-education">
-                <h3>Work Experience & Education</h3>
-                <p><strong>Work Experience:</strong> Consultant at Evercare Hospital</p>
+                <h3>Experience & Education</h3>
+                <p><strong>Current Role:</strong> {doctor.currentRole} </p>
                 <p><strong>Education:</strong></p>
                 <ul>
                     <li>{doctor.degree}</li>
