@@ -9,9 +9,19 @@ import showToast from './toast/Toast';
 function DoctorsInfo() {
     const navigate = useNavigate();
     const { id } = useParams();
-    const [doctor, setDoctor] = useState({});
     const [showPopup, setShowPopup] = useState(false); 
     const [regNo, setRegNo] = useState(""); 
+    const [days, setDays] = useState('');
+    const [time, setTime] = useState('');
+    const [dHospitals, setDHospitals] = useState([]);
+    const [doctor, setDoctor] = useState({
+        name: "",
+        dRegNo: "",
+        degree: "",
+        specialization: "",
+        contactNo: "",
+        hospitals: [],
+    });
 
 
     const openPopup = () => {
@@ -27,17 +37,24 @@ function DoctorsInfo() {
     const addHospital = (e) => {
         e.preventDefault();
         setRegNo(regNo);   
+        setDays(days);
+        setTime(time);
 
-        axios.put(`${process.env.REACT_APP_BACKEND_URL}/doctors/addHReg/${id}`,{regNo})
+        axios.put(`${process.env.REACT_APP_BACKEND_URL}/doctors/addHReg/${id}`,{regNo, days, time})
         .then( (res)=>{
             navigate(`/doctors/${id}`);
             showToast(res.data.message, "success");
+            window.location.reload(); //refreshes after adding hRegNo automatically
             setRegNo("");
+            setDays("");
+            setTime("");
         })
         .catch( (error)=>{
-            navigate(`/doctors/${id}`);
+            //navigate(`/doctors/${id}`);
             showToast(error.response.data.error, "error");
             setRegNo("");
+            setDays("");
+            setTime("");
         });
 
         setShowPopup(false); // Close popup after submitting
@@ -55,24 +72,47 @@ function DoctorsInfo() {
         })
     }
 
+    const chamberDeleteHandler = async(hRegNo)=>{
+        axios.delete(`${process.env.REACT_APP_BACKEND_URL}/doctors/${id}/hospital-detail/${hRegNo}`)
+        .then( (res)=>{
+            showToast(res.data.message, "success");
+            navigate(`/doctors/${id}`);
+            //refreshing the page automatically
+            window.location.reload();
+        })
+        .catch( (error)=>{
+            showToast(error.response.data.error, "error");
+        })
+    }
+
     const updateHandler = async()=>{
         navigate(`/doctors/${id}/update`);
     }
 
     //to show the doctors details whenever user land on this page
     useEffect( ()=>{
+        //getting dcotor informations
         axios.get(`${process.env.REACT_APP_BACKEND_URL}/doctors/${id}`)
         .then( (res)=>{
             setDoctor(res.data);
         })
         .catch( (error)=>{
+            console.log(error)
            showToast(error.response.data.error, "error");
         });
+
+        //getting hospitals where a doctor visits
+        axios.get(`${process.env.REACT_APP_BACKEND_URL}/doctors/${id}/hospital-detail`)
+        .then( (res)=>{
+            setDHospitals(res.data);
+        })
+        .catch( (error)=>{
+            console.log(error)
+            showToast(error.response.data.error, "error");
+        })
     },[]);
 
-    // useEffect( ()=>{
-    //     console.log(regNo);
-    // }, [regNo]);
+
 
   return (
     <div className="doctors-info-container">
@@ -120,6 +160,20 @@ function DoctorsInfo() {
                                 onChange={(e) => setRegNo(e.target.value)}
                                 required
                             />
+                            <input 
+                                type="text" 
+                                placeholder="Enter Days. e.g. Sunday, Monday" 
+                                value={days} 
+                                onChange={(e) => setDays(e.target.value)}
+                                required
+                            />
+                            <input 
+                                type="text" 
+                                placeholder="Enter Time. e.g. 0:00 AM - 0:00 PM" 
+                                value={time} 
+                                onChange={(e) => setTime(e.target.value)}
+                                required
+                            />
                             <div className="popup-buttons">
                                 <button type="submit" className="submit-btn"
                                 >Submit</button>
@@ -132,20 +186,24 @@ function DoctorsInfo() {
                 </div>
             )}
 
-            <div className="hospital">
-                <h4>Evercare Hospital</h4>
-                <p><strong>Address:</strong> Dhaka, Bangladesh</p>
-                <p><strong>Days:</strong> Sunday, Monday, Wednesday</p>
-                <p><strong>Time:</strong> 9:00 AM - 12:00 PM</p>
-                <button>Contact Us</button>
-            </div>
-            <div className="hospital">
-                <h4>Popular Diagnostic Centre Ltd., Dhaka</h4>
-                <p><strong>Address:</strong> Dhaka, Bangladesh</p>
-                <p><strong>Days:</strong> Tuesday, Thursday, Saturday</p>
-                <p><strong>Time:</strong> 3:00 PM - 6:00 PM</p>
-                <button>Contact Us</button>
-            </div>
+            {
+                dHospitals.length>0 ? (
+                    dHospitals.map( (hospital)=>(
+                        <div className="hospital">
+                            <h4>{hospital.name}</h4>
+                            <p><strong>Days:</strong> {hospital.days}</p>
+                            <p><strong>Time:</strong> {hospital.time}</p>
+                            <p><strong>Contact:</strong> {hospital.contact}</p>
+                            <button
+                            onClick={ ()=> chamberDeleteHandler(hospital.hRegNo)}
+                            >Delete</button>
+                        </div>
+                    ))
+                ) : (
+                    <p>No Hospital Found!</p>
+                )
+            }
+
         </div>
 
     </div>

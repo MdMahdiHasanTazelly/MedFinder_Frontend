@@ -15,7 +15,7 @@ function UpdateDoctor() {
         degree: "",
         specialization: "",
         contactNo: "",
-        hospitals: ""
+        hospitals: [],
     });
 
     const handleChange = (e) => {
