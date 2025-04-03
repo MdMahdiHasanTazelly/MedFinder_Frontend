@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Navbar() {
   const navigate = useNavigate();
+  
   const sessiontoken = localStorage.getItem('sessiontoken');  //getting session token from local storage
 
   const logoutHandler = async()=>{
@@ -28,11 +29,11 @@ function Navbar() {
             <ul className="nav-links">
               <li><a href="/find-doctors">Find Doctors</a></li>
               <li><a href="/find-hospitals">Find Hospitals</a></li>
-              {sessiontoken && <li><a href="#">Add Hospital</a></li> }
-              {sessiontoken && <li><a href="#">Add Doctor</a></li> }
+              {sessiontoken && <li><a href="/add-hospital">Add Hospital</a></li> }
+              {sessiontoken && <li><a href="/add-doctor">Add Doctor</a></li> }
 
-              <li><a href="/add-hospital">Add Hospital</a></li>
-              <li><a href="/add-doctor">Add Doctor</a></li>
+              {/* <li><a href="/add-hospital">Add Hospital</a></li>
+              <li><a href="/add-doctor">Add Doctor</a></li> */}
             </ul>
           </nav>
           <div className="auth-buttons">

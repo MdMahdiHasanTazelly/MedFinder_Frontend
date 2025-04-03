@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 function FindDoctor() {
+    const sessiontoken = localStorage.getItem('sessiontoken');
     const navigate = useNavigate();
     const [query, setQuery] = useState('');
     const [hospitals, setHospitals] = useState([]);
@@ -67,13 +68,17 @@ function FindDoctor() {
                             <p><strong>Location:</strong> {hospital.location.district}, {hospital.location.subDistrict}</p>
                             <p><strong>Address:</strong> {hospital.location.holdingNo}, {hospital.location.road || 'N/A'}</p>
                             <p><strong>BMDC Reg No:</strong> {hospital.hRegNo}</p>
-                            <button
-                            onClick={ ()=> deleteHospital(hospital._id) }
-                            >Delete</button>
+                            {sessiontoken && 
+                                <button
+                                onClick={ ()=> deleteHospital(hospital._id) }
+                                >Delete</button>
+                            }
 
-                            <button
-                            onClick={()=> updateHandler(hospital._id)}
-                            >Update</button>
+                            {sessiontoken &&
+                                <button
+                                onClick={()=> updateHandler(hospital._id)}
+                                >Update</button>
+                            }
                         </div>
                     ))
                 ) : (

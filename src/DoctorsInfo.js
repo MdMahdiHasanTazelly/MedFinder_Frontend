@@ -7,6 +7,7 @@ import showToast from './toast/Toast';
 
 
 function DoctorsInfo() {
+    const sessiontoken = localStorage.getItem('sessiontoken');
     const navigate = useNavigate();
     const { id } = useParams();
     const [showPopup, setShowPopup] = useState(false); 
@@ -126,8 +127,8 @@ function DoctorsInfo() {
                 <p><strong>Specialization:</strong>&nbsp; {doctor.specialization}</p>
                 <p><strong>BMDC Reg:</strong>&nbsp; {doctor.dRegNo}</p>
 
-                <button onClick={updateHandler} >Update</button>
-                <button onClick={ deletehandler }>Delete</button>
+                {sessiontoken && <button onClick={updateHandler} >Update</button> }
+                {sessiontoken && <button onClick={ deletehandler }>Delete</button> }
             </div>
 
 
@@ -146,7 +147,8 @@ function DoctorsInfo() {
 
         <div className="hospital-list">
             <h3>Hospitals & Diagnostic Centers</h3>
-            <button onClick={openPopup}>Add Hospital</button>
+
+            {sessiontoken && <button onClick={openPopup}>Add Hospital</button> }
 
             {showPopup && (
                 <div className="overlay">
@@ -194,9 +196,11 @@ function DoctorsInfo() {
                             <p><strong>Days:</strong> {hospital.days}</p>
                             <p><strong>Time:</strong> {hospital.time}</p>
                             <p><strong>Contact:</strong> {hospital.contact}</p>
-                            <button
-                            onClick={ ()=> chamberDeleteHandler(hospital.hRegNo)}
-                            >Delete</button>
+                            {sessiontoken &&
+                                <button
+                                onClick={ ()=> chamberDeleteHandler(hospital.hRegNo)}
+                                >Delete</button>
+                            }
                         </div>
                     ))
                 ) : (

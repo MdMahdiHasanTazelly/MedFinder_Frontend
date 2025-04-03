@@ -32,6 +32,7 @@ function Landing() {
                 className="search-input"
                 value={searchQuery}
                 onChange={handleSearchInput}
+                disabled
               />
               
               {showSuggestions && (
