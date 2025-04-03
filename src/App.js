@@ -10,6 +10,7 @@ import HospitalForm from './admin/HospitalForm.js';
 import FindHospital from './FindHospital.js';
 import FindDoctor from './FindDoctor.js';
 import UpdateDoctor from './UpdateDoctor.js';
+import UpdateHospital from './UpdateHospital.js';
 
 
 function App() {
@@ -33,13 +34,16 @@ function App() {
         <Navbar/>    
         <Routes>
           <Route path='/' element={<Landing/>}/>
-          <Route path="/doctors/:id/update" element={<UpdateDoctor/>}/>
-          <Route path='/find-hospitals' element={<FindHospital/>}/>
           <Route path='/login' element={<Login/>} />
-          <Route path='/find-doctors' element={<FindDoctor/>}/>
-          <Route path='/add-hospital' element={<HospitalForm/>}/>
           <Route path='/add-doctor' element={<DoctorForm/>}/>
           <Route path='/doctors/:id' element={<DoctorsInfo/>}/>
+          <Route path="/doctors/:id/update" element={<UpdateDoctor/>}/>
+          <Route path='/find-doctors' element={<FindDoctor/>}/>
+
+          <Route path='/find-hospitals' element={<FindHospital/>}/>
+          <Route path='/add-hospital' element={<HospitalForm/>}/>
+          <Route path='/hospitals/:id/update' element={<UpdateHospital/>}/>
+          
         </Routes>
          
         <Footer/>

@@ -2,9 +2,10 @@ import axios from 'axios';
 import './css/FindHospital.css';
 import showToast from './toast/Toast';
 import React, { useState, useEffect } from 'react';
-
+import { useNavigate } from 'react-router-dom';
 
 function FindDoctor() {
+    const navigate = useNavigate();
     const [query, setQuery] = useState('');
     const [hospitals, setHospitals] = useState([]);
 
@@ -30,6 +31,22 @@ function FindDoctor() {
         setQuery("");
     }
 
+    const deleteHospital = (id)=>{
+        axios.delete(`${process.env.REACT_APP_BACKEND_URL}/hospitals/${id}`)
+        .then( (res)=>{            
+            //refreshing the page automatically
+            window.location.reload();
+            showToast(res.data.message, "success");
+        })
+        .catch( (error)=>{
+            showToast(error.response.data.message, 'error');
+        });
+    }
+
+    const updateHandler = async(id)=>{
+        navigate(`/hospitals/${id}/update`);
+    }
+
     return (
         <div className="hospital-search-container">
             <h2>Search for Hospitals by Name</h2>
@@ -50,6 +67,13 @@ function FindDoctor() {
                             <p><strong>Location:</strong> {hospital.location.district}, {hospital.location.subDistrict}</p>
                             <p><strong>Address:</strong> {hospital.location.holdingNo}, {hospital.location.road || 'N/A'}</p>
                             <p><strong>BMDC Reg No:</strong> {hospital.hRegNo}</p>
+                            <button
+                            onClick={ ()=> deleteHospital(hospital._id) }
+                            >Delete</button>
+
+                            <button
+                            onClick={()=> updateHandler(hospital._id)}
+                            >Update</button>
                         </div>
                     ))
                 ) : (
